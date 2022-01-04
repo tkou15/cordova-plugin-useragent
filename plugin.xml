@@ -8,7 +8,7 @@
 	</engines>
 	<name>User-Agent</name>
 	<description>Allows you to change your User-Agent for HTTP requests.</description>
-	<author>Daniel Sogl</author>
+	<author>Koichi Takahashi</author>
 	<keywords>user,agent,useragent,user-agent</keywords>
 	<license>MIT</license>
 	<js-module src="www/UserAgent.js" name="UserAgent">
@@ -22,7 +22,7 @@
 			</feature>
 		</config-file>
 		<source-file src="src/android/UserAgent.java" target-dir="src/tkou15/cordova/UserAgent" />
-		<dependency id="cordova-support-android-plugin" version="~1.0.0"/>
+		<dependency id="cordova-support-android-plugin"/>
 	</platform>
 	<platform name="ios">
 		<plugins-plist key="UserAgent" string="UserAgent" />
