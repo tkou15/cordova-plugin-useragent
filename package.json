@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "Allows you to change your User-Agent for HTTP requests.",
   "cordova": {
-    "id": "com.tkou15.cordova.useragent",
+    "id": "tkou15.cordova.useragent",
     "platforms": [
       "android",
       "ios"
