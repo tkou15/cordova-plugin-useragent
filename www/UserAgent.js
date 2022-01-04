@@ -1,18 +1,21 @@
-var noop = function(){};
-var UserAgent = {
-    set: function (text, success, fail) {
-    	text = text||""; // Empty is the same as issuing reset.
-        cordova.exec(success||noop, fail||noop, "UserAgent", "set", [text]);
+var exec = require('cordova/exec');
+
+const PluginName = 'UserAgent';
+
+module.exports = {
+    set: function (text) {
+        return new Promise(function (resolve, reject) {
+            exec(resolve, reject, PluginName, 'set', [text]);
+        });
     },
-    get: function (success, fail) {
-        if (success) {
-           cordova.exec(success, fail||noop, "UserAgent", "get", []);
-         } else {
-           return false;
-        }
+    get: function () {
+        return new Promise(function (resolve, reject) {
+            exec(resolve, reject, PluginName, 'get', []);
+        });
     },
-    reset: function (success, fail) {
-        cordova.exec(success||noop, fail||noop, "UserAgent", "reset", []);
+    reset: function () {
+        return new Promise(function (resolve, reject) {
+            exec(resolve, reject, PluginName, 'reset', []);
+        });
     }
 };
-module.exports = UserAgent;
