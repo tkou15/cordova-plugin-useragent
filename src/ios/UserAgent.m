@@ -5,27 +5,29 @@
 
 - (void)get: (CDVInvokedUrlCommand*)command
 {
-    [self.webView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError* error) {
+    WKWebView* wkWebView = (WKWebView*)self.webViewEngine;
+    [wkWebView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError* error) {
         NSString* userAgent = result;
-        NSString* callbackId = command.callbackId;
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:userAgent];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
 
 - (void)set: (CDVInvokedUrlCommand*)command
 {
     id newUserAgent = [command argumentAtIndex:0];
-    self.webView.customUserAgent = newUserAgent;
     
-    NSString* callbackId = command.callbackId;
+    WKWebView* wkWebView = (WKWebView*)self.webViewEngine;
+    wkWebView.customUserAgent = newUserAgent;
+    
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:newUserAgent];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)reset: (CDVInvokedUrlCommand*)command
 {
-    self.webView.customUserAgent = nil;
+    WKWebView* wkWebView = (WKWebView*)self.webViewEngine;
+    wkWebView.customUserAgent = nil;
     [self get:command];
 }
 
